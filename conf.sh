@@ -1,10 +1,10 @@
 ifconfig
 echo "Hi, on what interface do you want to run the AP?"
-echo "USE WLAN. so for example wlan0 or wlan1"
+echo "USE WLAN. so for example wlan0 or wlan1: "
 read WLAN
-echo "Name of the SSID!"
+echo "Name of the SSID: "
 read SSID
-echo "Password of the AP!"
+echo "Password of the AP: "
 read PASS
 
 
@@ -83,7 +83,7 @@ echo "ctrl_interface=/var/run/wpa_supplicant" >> $x
 echo "update_config=1" >> $x
 echo "network={" >> $x
 echo "        ssid=\"$SSID\"" >> $x
-echo "        psk=\"PASS\"" >> $x
+echo "        psk=\"$PASS\"" >> $x
 echo "}" >> $x
 sudo mv $x /etc/wpa_supplicant/wpa_supplicant.conf
 
@@ -91,14 +91,14 @@ sudo mv $x /etc/wpa_supplicant/wpa_supplicant.conf
 touch $x
 echo "interface=$WLAN" >> $x
 echo "driver=nl80211" >> $x
-echo "ssid=Broken" >> $x
+echo "ssid=$SSID" >> $x
 echo "hw_mode=g" >> $x
 echo "channel=6" >> $x
 echo "macaddr_acl=0" >> $x
 echo "auth_algs=1" >> $x
 echo "ignore_broadcast_ssid=0" >> $x
 echo "wpa=2" >> $x
-echo "wpa_passphrase=BrokenNetwork" >> $x
+echo "wpa_passphrase=$PASS" >> $x
 echo "wpa_key_mgmt=WPA-PSK" >> $x
 echo "wpa_pairwise=TKIP" >> $x
 echo "rsn_pairwise=CCMP" >> $x
